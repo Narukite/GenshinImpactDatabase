@@ -1,0 +1,4 @@
+rootProject.name = "GenshinImpactDatabase"
+include ':app'
+include ':core'
+include ':favoritecharacter'

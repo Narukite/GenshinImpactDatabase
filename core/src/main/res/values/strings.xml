@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="traveler_name_format">%s (%s)</string>
+    <string name="vision_weapon_format">%s %s</string>
+    <string name="unknown_value_format">Unknown %s</string>
+    <string name="birthday_format">%s %s</string>
+    <string name="text_primary">Sample of title text</string>
+    <string name="text_subtitle">Sample of subtitle text</string>
+    <string name="nation">Nation</string>
+    <string name="affiliation">Affiliation</string>
+    <string name="birthday">Birthday</string>
+    <string name="image_description">Image</string>
+</resources>

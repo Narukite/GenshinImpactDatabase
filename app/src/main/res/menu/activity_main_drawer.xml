@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/characters">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_characters_list"
+                    android:icon="@drawable/ic_character"
+                    android:title="@string/characters_list" />
+                <item
+                    android:id="@+id/nav_favorite_characters"
+                    android:icon="@drawable/ic_favorite_green"
+                    android:title="@string/favorite_characters" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/weapons">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_weapons_list"
+                    android:icon="@drawable/ic_weapon"
+                    android:title="@string/weapons_list" />
+                <item
+                    android:id="@+id/nav_favorite_weapons"
+                    android:icon="@drawable/ic_favorite_amber"
+                    android:title="@string/favorite_weapons" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

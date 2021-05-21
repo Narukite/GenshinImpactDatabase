@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.loader:loader:1.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/08780a674dcc710fd6b5175f5064beb0/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/00ca7518bff37d9e00e667bb53b8bb51/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/628884beb9d27e92ba092a42f66dcd81/transformed/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3ded1a78659d35ebe1b63d0031548a4b/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/697bc987aa7f64ee8a01dc05dbecadae/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d6c91a146d225adc59b28bb716a29477/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/67e648174047020ccf69cba8c8b90814/loader-1.0.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/432a051ebd7ad37c5b4027b3fc6d4c21/transformed/loader-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/432a051ebd7ad37c5b4027b3fc6d4c21/transformed/loader-1.0.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/432a051ebd7ad37c5b4027b3fc6d4c21/transformed/loader-1.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.loader/loader/1.0.0/b9ef587f3e46c7fe5b00264989764e43ff45cada/loader-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

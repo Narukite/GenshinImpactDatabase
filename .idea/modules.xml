@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GenshinImpactDatabase.iml" filepath="$PROJECT_DIR$/.idea/modules/GenshinImpactDatabase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GenshinImpactDatabase.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GenshinImpactDatabase.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/GenshinImpactDatabase.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/GenshinImpactDatabase.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/favoritecharacter/GenshinImpactDatabase.favoritecharacter.iml" filepath="$PROJECT_DIR$/.idea/modules/favoritecharacter/GenshinImpactDatabase.favoritecharacter.iml" />
+    </modules>
+  </component>
+</project>

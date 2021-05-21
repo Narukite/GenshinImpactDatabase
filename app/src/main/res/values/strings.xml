@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Genshin Impact Database</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="weapons">Weapons</string>
+    <string name="characters">Characters</string>
+    <string name="characters_list">Characters List</string>
+    <string name="favorite_characters">Favorite Characters</string>
+    <string name="weapons_list">Weapons List</string>
+    <string name="favorite_weapons">Favorite Weapons</string>
+    <string name="something_wrong">Oops.. something went wrong</string>
+    <string name="data_on_the_server_is_empty">Data on the server is empty!</string>
+    <string name="failed_fetching_the_data">Failed fetching the data!</string>
+    <string name="favorite">Favorite</string>
+    <string name="name">Name</string>
+    <string name="wielder">Wielder</string>
+    <string name="vision_weapon">Vision Weapon</string>
+    <string name="constellation">Constellation</string>
+    <string name="rarity">Rarity</string>
+    <string name="nation_value">Nation Value</string>
+    <string name="affiliation_value">Affiliation Value</string>
+    <string name="constellation_value">Constellation Value</string>
+    <string name="birthday_value">Birthday Value</string>
+    <string name="rarity_value">Rarity Value</string>
+    <string name="description">Description</string>
+    <string name="title_favoritecharacter">Module Title</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Please input the character\'s name</string>
+</resources>

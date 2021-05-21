@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.bumptech.glide:gifdecoder:4.12.0@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/52c64198f2f1ebe811d8b273096f77a5/transformed/gifdecoder-4.12.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0578b5dc588de050c0c859fb91f7829a/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f2700d52393ac244163d897b71967e7b/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad7997716c5f438e92fbbc0d31b37e00/transformed/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8713327e83e5d70cd85bdc00f2843ca8/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bc28cc974eb064d2fae302fd8be0893d/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e8c8d01f77a2b175bce9a19fc3d1527e/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f4b79c57e0f285d34fea37656c8e4dc7/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/52c64198f2f1ebe811d8b273096f77a5/transformed/gifdecoder-4.12.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/52c64198f2f1ebe811d8b273096f77a5/transformed/gifdecoder-4.12.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/52c64198f2f1ebe811d8b273096f77a5/transformed/gifdecoder-4.12.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/gifdecoder/4.12.0/746b9323bb108e97840d4dacd37bd8d4cec34419/gifdecoder-4.12.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/gifdecoder/4.12.0/756734cd8ffb3c771f376767fa8464157f2d02d4/gifdecoder-4.12.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
