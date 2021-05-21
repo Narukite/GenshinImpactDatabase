@@ -39,6 +39,3 @@ jobs:
       - store_artifacts:  
           path: app/build/outputs/apk/debug/
           destination: artifact-file
-      - run:
-          name: Generate Code Coverage
-          command: ./gradlew connectedCheck
