@@ -3,9 +3,12 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+
+    id 'jacoco'
 }
 
 apply from: '../shared_dependencies.gradle'
+apply from: '../task_jacocoTestReport.gradle'
 
 android {
     compileSdkVersion 30
@@ -36,6 +39,15 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+                excludes = ['jdk.internal.*']
+            }
+        }
+        unitTests.returnDefaultValues = true
     }
 }
 

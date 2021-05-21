@@ -8,9 +8,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/820f73ce3aa457c08c49ed936705281e/koin-android-3.0.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ca56c224dae19b243b1fab39d3383a41/koin-android-3.0.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9d97016111252bcfd7a49751673fea4f/koin-android-3.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4791b86330cd179447781aee69252738/transformed/koin-android-3.0.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4791b86330cd179447781aee69252738/transformed/koin-android-3.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4791b86330cd179447781aee69252738/transformed/koin-android-3.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0c4b892f7b65eb0fc6d434bd8d63d3bc/transformed/koin-android-3.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0c4b892f7b65eb0fc6d434bd8d63d3bc/transformed/koin-android-3.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.insert-koin/koin-android/3.0.1/8e748b085b9070277676f345c26520fc7c70733a/koin-android-3.0.1-javadoc.jar!/" />
