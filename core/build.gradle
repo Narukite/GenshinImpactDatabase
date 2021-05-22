@@ -23,6 +23,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
         buildConfigField("String", "PASSPHRASE_KEY", '"genshinimpactisnotmyproperty"')
+        buildConfigField("String", "SERVER_KEY_1", '"sha256/Vuy2zjFSPqF5Hz18k88DpUViKGbABaF3vZx5Raghplc="')
+        buildConfigField("String", "SERVER_KEY_2", '"sha256/k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws="')
+        buildConfigField("String", "SERVER_KEY_3", '"sha256/WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="')
     }
 
     buildTypes {
