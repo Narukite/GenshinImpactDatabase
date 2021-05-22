@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.unknowncompany.genshinimpactdatabase.characterdetail.CharacterDetailActivity
 import com.unknowncompany.genshinimpactdatabase.core.ui.CharacterAdapter
 import com.unknowncompany.genshinimpactdatabase.core.utils.DataMapper
 import com.unknowncompany.genshinimpactdatabase.favoritecharacter.databinding.FragmentFavoriteCharacterBinding
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,13 +44,18 @@ class FavoriteCharacterFragment : Fragment() {
                 startActivity(intent)
             }
 
-            CoroutineScope(Dispatchers.Main).launch {
-                viewModel.favoriteCharacter.await().observe(viewLifecycleOwner, { data ->
-                    characterAdapter.setData(DataMapper
-                        .mapDomainModelsToPresentationModels(data,
-                            requireActivity().resources))
-                    binding.viewEmpty.root.visibility =
-                        if (data.isNotEmpty()) View.GONE else View.VISIBLE
+            lifecycleScope.launch {
+                viewModel.favoriteCharacter.await().observe(viewLifecycleOwner, { characters ->
+                    val data = async(Dispatchers.Default) {
+                        DataMapper
+                            .mapDomainModelsToPresentationModels(characters,
+                                requireActivity().resources)
+                    }
+                    lifecycleScope.launch {
+                        characterAdapter.setData(data.await())
+                        binding.viewEmpty.root.visibility =
+                            if (characters.isNotEmpty()) View.GONE else View.VISIBLE
+                    }
                 })
             }
 

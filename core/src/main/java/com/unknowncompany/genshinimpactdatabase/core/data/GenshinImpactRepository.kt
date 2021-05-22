@@ -6,18 +6,17 @@ import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.network.
 import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.response.CharacterResponse
 import com.unknowncompany.genshinimpactdatabase.core.domain.model.Character
 import com.unknowncompany.genshinimpactdatabase.core.domain.repository.IGenshinImpactRepository
-import com.unknowncompany.genshinimpactdatabase.core.utils.AppExecutors
+import com.unknowncompany.genshinimpactdatabase.core.utils.AppCoroutineScopes
 import com.unknowncompany.genshinimpactdatabase.core.utils.DataMapper
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class GenshinImpactRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors,
+    private val scopes: AppCoroutineScopes,
 ) : IGenshinImpactRepository {
 
     override fun getCharacterNames(): Flow<ApiResponse<List<String>>> =
@@ -27,7 +26,7 @@ class GenshinImpactRepository(
         object :
             com.unknowncompany.genshinimpactdatabase.core.data.NetworkBoundResource<List<Character>, List<CharacterResponse>>() {
             override suspend fun loadFromDB(): Flow<List<Character>> {
-                val data = CoroutineScope(Dispatchers.Default).async {
+                val data = scopes.default().async {
                     localDataSource.getAllCharacter().map {
                         DataMapper.mapEntitiesToModels(it)
                     }
@@ -43,13 +42,13 @@ class GenshinImpactRepository(
                 remoteDataSource.getCharacters(characterNames)
 
             override suspend fun saveCallResult(data: List<CharacterResponse>) {
-                val entities = CoroutineScope(Dispatchers.Default).async {
+                val entities = scopes.default().async {
                     DataMapper
                         .mapResponsesToEntities(
                             data)
                 }
 
-                val sortedEntities = CoroutineScope(Dispatchers.Default).async {
+                val sortedEntities = scopes.default().async {
                     DataMapper
                         .sortCharacterEntitiesByCharacterId(
                             entities.await())
@@ -63,7 +62,7 @@ class GenshinImpactRepository(
         }.asFlow()
 
     override suspend fun getCharacterByNameQuery(name: String): List<Character> {
-        val data = CoroutineScope(Dispatchers.Default).async {
+        val data = scopes.default().async {
             DataMapper.mapEntitiesToModels(
                 localDataSource.getCharacterByNameQuery(name))
         }
@@ -72,7 +71,7 @@ class GenshinImpactRepository(
     }
 
     override suspend fun getFavoriteCharacter(): Flow<List<Character>> {
-        val data = CoroutineScope(Dispatchers.Default).async {
+        val data = scopes.default().async {
             localDataSource.getFavoriteCharacter().map {
                 DataMapper.mapEntitiesToModels(it)
             }
@@ -82,14 +81,12 @@ class GenshinImpactRepository(
     }
 
     override fun updateFavoriteCharacterByCharacterId(characterId: String, currentState: Boolean) {
-        appExecutors
-            .diskIO()
-            .execute {
-                localDataSource
-                    .updateFavoriteCharacterByCharacterId(
-                        characterId,
-                        currentState)
-            }
+        scopes.io().launch {
+            localDataSource
+                .updateFavoriteCharacterByCharacterId(
+                    characterId,
+                    currentState)
+        }
     }
 
 }

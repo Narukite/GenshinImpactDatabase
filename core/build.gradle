@@ -84,6 +84,7 @@ dependencies {
     implementation "androidx.room:room-ktx:2.3.0"
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     //performance debug
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'

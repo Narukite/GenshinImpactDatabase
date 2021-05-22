@@ -64,11 +64,13 @@ class CharacterFragment : Fragment() {
                 .observe(viewLifecycleOwner, getCharacterNamesObserver)
 
             viewModel.searchResult.observe(viewLifecycleOwner, { characters ->
-                CoroutineScope(Dispatchers.Default).launch {
-                    val data = DataMapper.mapDomainModelsToPresentationModels(characters,
-                        requireActivity().resources)
+                lifecycleScope.launch {
+                    val data = async(Dispatchers.Default) {
+                        DataMapper.mapDomainModelsToPresentationModels(characters,
+                            requireActivity().resources)
+                    }
                     (Dispatchers.Main){
-                        characterAdapter.setData(data)
+                        characterAdapter.setData(data.await())
                     }
                 }
             })
@@ -138,9 +140,14 @@ class CharacterFragment : Fragment() {
                             binding.viewError.tvError.text =
                                 characters.message ?: getString(R.string.no_internet)
                         } else {
-                            characterAdapter.setData(DataMapper.mapDomainModelsToPresentationModels(
-                                characters.data as List<Character>,
-                                requireActivity().resources))
+                            lifecycleScope.launch {
+                                val data = async(Dispatchers.Default) {
+                                    DataMapper.mapDomainModelsToPresentationModels(
+                                        characters.data as List<Character>,
+                                        requireActivity().resources)
+                                }
+                                characterAdapter.setData(data.await())
+                            }
                         }
                     }
                     is Resource.Error -> {
