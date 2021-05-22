@@ -42,8 +42,8 @@ jobs:
                   test-command: ./gradlew connectedCheck
                   system-image: system-images;android-29;default;x86
             - codecov/upload:
-                  file: app\build\reports\coverage\debug\report.xml
+                  file: app/build/reports/coverage/debug/report.xml
             - codecov/upload:
-                  file: core\build\reports\coverage\debug\report.xml
+                  file: core/build/reports/coverage/debug/report.xml
             - codecov/upload:
-                  file: favoritecharacter\build\reports\coverage\debug\report.xml
+                  file: favoritecharacter/build/reports/coverage/debug/report.xml
