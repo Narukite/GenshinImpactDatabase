@@ -38,7 +38,7 @@ jobs:
                   destination: artifact-file
             - android/start-emulator-and-run-tests:
                   test-command: ./gradlew connectedCheck
-                  system-image: system-images;android-30;google_apis;x86
+                  system-image: system-images;android-29;default;x86
             - codecov/upload:
                   file: app\build\reports\coverage\debug\report.xml
             - codecov/upload:
