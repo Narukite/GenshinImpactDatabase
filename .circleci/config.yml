@@ -43,7 +43,10 @@ jobs:
                   system-image: system-images;android-29;default;x86
             - codecov/upload:
                   file: app/build/reports/coverage/debug/report.xml
+                  token: a1c435b4-1363-4bfa-9683-335e506f1b9d
             - codecov/upload:
                   file: core/build/reports/coverage/debug/report.xml
+                  token: a1c435b4-1363-4bfa-9683-335e506f1b9d
             - codecov/upload:
                   file: favoritecharacter/build/reports/coverage/debug/report.xml
+                  token: a1c435b4-1363-4bfa-9683-335e506f1b9d
