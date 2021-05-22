@@ -9,7 +9,7 @@
     <string name="favorite_characters">Favorite Characters</string>
     <string name="weapons_list">Weapons List</string>
     <string name="favorite_weapons">Favorite Weapons</string>
-    <string name="something_wrong">Oops.. something went wrong</string>
+    <string name="no_internet">You\'re not connected to the internet..</string>
     <string name="data_on_the_server_is_empty">Data on the server is empty!</string>
     <string name="failed_fetching_the_data">Failed fetching the data!</string>
     <string name="favorite">Favorite</string>

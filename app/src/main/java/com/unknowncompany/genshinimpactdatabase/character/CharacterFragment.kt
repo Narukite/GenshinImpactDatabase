@@ -2,7 +2,6 @@ package com.unknowncompany.genshinimpactdatabase.character
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,8 +65,6 @@ class CharacterFragment : Fragment() {
 
             viewModel.searchResult.observe(viewLifecycleOwner, { characters ->
                 CoroutineScope(Dispatchers.Default).launch {
-                    Log.d("Cek", "onViewCreated: searchResult onChanged")
-
                     val data = DataMapper.mapDomainModelsToPresentationModels(characters,
                         requireActivity().resources)
                     (Dispatchers.Main){
@@ -134,19 +131,23 @@ class CharacterFragment : Fragment() {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
-
-                        Log.d("Cek", "getAllCharacterObserver success")
-
                         binding.progressBar.visibility = View.GONE
-                        characterAdapter.setData(DataMapper.mapDomainModelsToPresentationModels(
-                            characters.data as List<Character>,
-                            requireActivity().resources))
+                        if (characters.data.isNullOrEmpty()) {
+                            binding.progressBar.visibility = View.GONE
+                            binding.viewError.root.visibility = View.VISIBLE
+                            binding.viewError.tvError.text =
+                                characters.message ?: getString(R.string.no_internet)
+                        } else {
+                            characterAdapter.setData(DataMapper.mapDomainModelsToPresentationModels(
+                                characters.data as List<Character>,
+                                requireActivity().resources))
+                        }
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
                         binding.viewError.root.visibility = View.VISIBLE
                         binding.viewError.tvError.text =
-                            characters.message ?: getString(R.string.something_wrong)
+                            characters.message ?: getString(R.string.no_internet)
                     }
                 }
             }
