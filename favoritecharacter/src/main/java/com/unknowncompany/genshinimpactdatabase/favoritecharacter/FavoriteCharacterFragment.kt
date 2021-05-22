@@ -46,12 +46,12 @@ class FavoriteCharacterFragment : Fragment() {
 
             lifecycleScope.launch {
                 viewModel.favoriteCharacter.await().observe(viewLifecycleOwner, { characters ->
-                    val data = async(Dispatchers.Default) {
-                        DataMapper
-                            .mapDomainModelsToPresentationModels(characters,
-                                requireActivity().resources)
-                    }
                     lifecycleScope.launch {
+                        val data = async(Dispatchers.Default) {
+                            DataMapper
+                                .mapDomainModelsToPresentationModels(characters,
+                                    requireActivity().resources)
+                        }
                         characterAdapter.setData(data.await())
                         binding.viewEmpty.root.visibility =
                             if (characters.isNotEmpty()) View.GONE else View.VISIBLE
