@@ -22,6 +22,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        buildConfigField("String", "PASSPHRASE_KEY", '"genshinimpactisnotmyproperty"')
     }
 
     buildTypes {
@@ -67,10 +68,17 @@ dependencies {
     implementation "androidx.room:room-runtime:2.3.0"
     kapt "androidx.room:room-compiler:2.3.0"
 
+    //database encryption
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+
     //async
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
     implementation "androidx.room:room-ktx:2.3.0"
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+
+    //performance debug
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }

@@ -1,6 +1,7 @@
 package com.unknowncompany.genshinimpactdatabase.core.di
 
 import androidx.room.Room
+import com.unknowncompany.genshinimpactdatabase.core.BuildConfig
 import com.unknowncompany.genshinimpactdatabase.core.data.source.local.LocalDataSource
 import com.unknowncompany.genshinimpactdatabase.core.data.source.local.room.GenshinImpactDatabase
 import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.RemoteDataSource
@@ -8,6 +9,8 @@ import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.network.
 import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.network.ApiService
 import com.unknowncompany.genshinimpactdatabase.core.domain.repository.IGenshinImpactRepository
 import com.unknowncompany.genshinimpactdatabase.core.utils.AppExecutors
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -19,11 +22,16 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<GenshinImpactDatabase>().genshinImpactDao() }
     single {
+        val passphrase: ByteArray =
+            SQLiteDatabase.getBytes(BuildConfig.PASSPHRASE_KEY.toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             GenshinImpactDatabase::class.java,
             "GenshinImpact.db"
-        ).fallbackToDestructiveMigration().build()
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 
