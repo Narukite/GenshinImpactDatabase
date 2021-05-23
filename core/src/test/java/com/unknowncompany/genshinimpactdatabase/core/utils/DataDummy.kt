@@ -8,13 +8,7 @@ object DataDummy {
     fun getListCharacterEntityDummy() =
         listOf(getCharacterEntityDummy())
 
-    fun getCharacterEntityDummy() =
+    private fun getCharacterEntityDummy() =
         CharacterEntity("dummy", "", "", "", "", "", "", null, 0, "", "", false)
-
-    fun getListCharacterDummy() =
-        listOf(getCharacterDummy())
-
-    fun getCharacterDummy() =
-        Character("dummy", "", "", "", "", "", "", null, 0, "", "", false)
 
 }
