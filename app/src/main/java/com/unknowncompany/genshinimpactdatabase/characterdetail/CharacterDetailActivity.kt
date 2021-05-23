@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -14,6 +15,8 @@ import com.unknowncompany.genshinimpactdatabase.R
 import com.unknowncompany.genshinimpactdatabase.core.ui.CharacterModel
 import com.unknowncompany.genshinimpactdatabase.core.utils.ImageViewHelper
 import com.unknowncompany.genshinimpactdatabase.databinding.ActivityCharacterDetailBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -46,10 +49,12 @@ class CharacterDetailActivity : AppCompatActivity() {
             setStatusFavorite(favoriteState)
             binding.fab.setOnClickListener {
                 favoriteState = !favoriteState
-                viewModel.updateFavoriteCharacterByCharacterId(
-                    characterData.characterId,
-                    characterData.isFavorite)
-                setStatusFavorite(favoriteState)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    viewModel.updateFavoriteCharacterByCharacterId(
+                        characterData.characterId,
+                        characterData.isFavorite)
+                    setStatusFavorite(favoriteState)
+                }
             }
 
             val contentBinding = binding.content

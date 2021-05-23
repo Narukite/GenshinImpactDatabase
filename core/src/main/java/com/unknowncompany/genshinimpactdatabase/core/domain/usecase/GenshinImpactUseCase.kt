@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface GenshinImpactUseCase {
 
-    fun getCharacterNames(): Flow<ApiResponse<List<String>>>
+    suspend fun getCharacterNames(): Flow<ApiResponse<List<String>>>
 
-    fun getAllCharacter(characterNames: List<String>): Flow<Resource<List<Character>>>
+    suspend fun getAllCharacter(characterNames: List<String>): Flow<Resource<List<Character>>>
 
     suspend fun getCharacterByNameQuery(name: String): List<Character>
 
     suspend fun getFavoriteCharacter(): Flow<List<Character>>
 
-    fun updateFavoriteCharacterByCharacterId(characterId: String, currentState: Boolean)
+    suspend fun updateFavoriteCharacterByCharacterId(characterId: String, currentState: Boolean)
 }

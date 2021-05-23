@@ -26,6 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterFragment : Fragment() {
 
+    private val parentViewModel: MainActivityViewModel by sharedViewModel()
     private val viewModel: CharacterViewModel by viewModel()
     private lateinit var characterAdapter: CharacterAdapter
 
@@ -40,9 +41,9 @@ class CharacterFragment : Fragment() {
         return binding.root
     }
 
-    @ObsoleteCoroutinesApi
-    @FlowPreview
     @ExperimentalCoroutinesApi
+    @FlowPreview
+    @ObsoleteCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,38 +61,59 @@ class CharacterFragment : Fragment() {
             }
 
             binding.progressBar.visibility = View.VISIBLE
-            viewModel.characterNames
-                .observe(viewLifecycleOwner, getCharacterNamesObserver)
+            viewModel.resources = requireActivity().resources
+            observeCharacterNames()
+            observeSearchResult()
+            observeNameQuery()
 
-            viewModel.searchResult.observe(viewLifecycleOwner, { characters ->
-                lifecycleScope.launch {
-                    val data = async(Dispatchers.Default) {
-                        DataMapper.mapDomainModelsToPresentationModels(characters,
-                            requireActivity().resources)
-                    }
-                    (Dispatchers.Main){
-                        characterAdapter.setData(data.await())
-                    }
-                }
-            })
-
-            val parentViewModel: MainActivityViewModel by sharedViewModel()
-            parentViewModel.nameQuery.observe(viewLifecycleOwner, { name ->
-                lifecycleScope.launch {
-                    viewModel.nameQueryChannel.send(name)
-                }
-            })
             val parentActivity = activity as MainActivity
             parentActivity.onViewAttachedToWindowCallback = {
-                viewModel.getAllCharacter(ArrayList())
-                    .removeObserver(getAllCharacterObserver)
+                removeAllCharacterObserver()
             }
             parentActivity.onViewDetachedFromWindowCallback = {
-                viewModel.getAllCharacter(ArrayList())
-                    .observe(viewLifecycleOwner, getAllCharacterObserver)
+                observeAllCharacter()
                 parentViewModel.nameQuery.value = ""
             }
 
+        }
+    }
+
+    private fun observeCharacterNames() {
+        lifecycleScope.launch {
+            viewModel.getCharacterNames()
+                .observe(viewLifecycleOwner, getCharacterNamesObserver)
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    @FlowPreview
+    @ObsoleteCoroutinesApi
+    private fun observeSearchResult() {
+        viewModel.searchResult.observe(viewLifecycleOwner, { characters ->
+            characterAdapter.setData(characters)
+        })
+    }
+
+    @ObsoleteCoroutinesApi
+    private fun observeNameQuery() {
+        parentViewModel.nameQuery.observe(viewLifecycleOwner, { name ->
+            lifecycleScope.launch {
+                viewModel.nameQueryChannel.send(name)
+            }
+        })
+    }
+
+    private fun removeAllCharacterObserver() {
+        lifecycleScope.launch {
+            viewModel.getAllCharacter(ArrayList())
+                .removeObserver(getAllCharacterObserver)
+        }
+    }
+
+    private fun observeAllCharacter(list: List<String> = ArrayList()) {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getAllCharacter(list)
+                .observe(viewLifecycleOwner, getAllCharacterObserver)
         }
     }
 
@@ -100,9 +122,7 @@ class CharacterFragment : Fragment() {
             if (characterNames != null) {
                 when (characterNames) {
                     is ApiResponse.Success -> {
-                        viewModel.getAllCharacter(characterNames.data).observe(
-                            viewLifecycleOwner,
-                            getAllCharacterObserver)
+                        observeAllCharacter(characterNames.data)
                     }
                     is ApiResponse.Empty -> {
                         binding.progressBar.visibility = View.GONE
@@ -117,12 +137,10 @@ class CharacterFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        viewModel.getAllCharacter(ArrayList())
-                            .observe(viewLifecycleOwner, getAllCharacterObserver)
+                        observeAllCharacter()
                     }
                 }
             }
-
         }
 
     private val getAllCharacterObserver =
@@ -135,7 +153,6 @@ class CharacterFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         if (characters.data.isNullOrEmpty()) {
-                            binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text =
                                 characters.message ?: getString(R.string.no_internet)
@@ -143,8 +160,8 @@ class CharacterFragment : Fragment() {
                             lifecycleScope.launch {
                                 val data = async(Dispatchers.Default) {
                                     DataMapper.mapDomainModelsToPresentationModels(
-                                        characters.data as List<Character>,
-                                        requireActivity().resources)
+                                        characters.data,
+                                        resources)
                                 }
                                 characterAdapter.setData(data.await())
                             }

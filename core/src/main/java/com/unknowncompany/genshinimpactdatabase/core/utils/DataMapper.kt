@@ -72,66 +72,69 @@ object DataMapper {
         "%$input%"
 
     fun mapDomainModelsToPresentationModels(
-        input: List<Character>,
-        resources: Resources,
+        input: List<Character>?,
+        resources: Resources?,
     ): List<CharacterModel> {
         val characterList = ArrayList<CharacterModel>()
 
-        input.map {
-            val name = if (it.name == CharacterAdapter.ITEM_NAME_EXCEPTION) resources.getString(
-                R.string.traveler_name_format,
-                it.name,
-                it.vision)
-            else it.name
-            val visionWeapon = resources.getString(
-                R.string.vision_weapon_format,
-                it.vision,
-                it.weapon)
-            val nation =
-                if (it.nation.isNotEmpty()) it.nation
-                else resources.getString(
-                    R.string.unknown_value_format,
-                    resources.getString(R.string.nation))
-            val affiliation =
-                if (it.affiliation.isNotEmpty()) it.affiliation
-                else resources.getString(
-                    R.string.unknown_value_format,
-                    resources.getString(R.string.affiliation))
-            val birthday = "".run {
-                val value: String
-                if (it.birthday != null) {
-                    val calendar = Calendar.getInstance()
-                    calendar.time = it.birthday as Date
-                    val month = SimpleDateFormat("MMMM", Locale.getDefault()).format(calendar.time)
-                    val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
-                    value = resources.getString(
-                        R.string.birthday_format,
-                        month,
-                        day)
-                } else {
-                    value = resources.getString(
+        if (input != null && resources != null) {
+            input.map {
+                val name = if (it.name == CharacterAdapter.ITEM_NAME_EXCEPTION) resources.getString(
+                    R.string.traveler_name_format,
+                    it.name,
+                    it.vision)
+                else it.name
+                val visionWeapon = resources.getString(
+                    R.string.vision_weapon_format,
+                    it.vision,
+                    it.weapon)
+                val nation =
+                    if (it.nation.isNotEmpty()) it.nation
+                    else resources.getString(
                         R.string.unknown_value_format,
-                        resources.getString(R.string.birthday)
-                    )
+                        resources.getString(R.string.nation))
+                val affiliation =
+                    if (it.affiliation.isNotEmpty()) it.affiliation
+                    else resources.getString(
+                        R.string.unknown_value_format,
+                        resources.getString(R.string.affiliation))
+                val birthday = "".run {
+                    val value: String
+                    if (it.birthday != null) {
+                        val calendar = Calendar.getInstance()
+                        calendar.time = it.birthday as Date
+                        val month =
+                            SimpleDateFormat("MMMM", Locale.getDefault()).format(calendar.time)
+                        val day = calendar.get(Calendar.DAY_OF_MONTH).toString()
+                        value = resources.getString(
+                            R.string.birthday_format,
+                            month,
+                            day)
+                    } else {
+                        value = resources.getString(
+                            R.string.unknown_value_format,
+                            resources.getString(R.string.birthday)
+                        )
+                    }
+                    value
                 }
-                value
-            }
-            val rarity = rarityIntToRarityString(it.rarity)
+                val rarity = rarityIntToRarityString(it.rarity)
 
-            val characterModel = CharacterModel(
-                characterId = it.characterId,
-                name = name,
-                visionWeapon = visionWeapon,
-                nation = nation,
-                affiliation = affiliation,
-                constellation = it.constellation,
-                birthday = birthday,
-                rarity = rarity,
-                description = it.description,
-                image = it.image,
-                isFavorite = it.isFavorite
-            )
-            characterList.add(characterModel)
+                val characterModel = CharacterModel(
+                    characterId = it.characterId,
+                    name = name,
+                    visionWeapon = visionWeapon,
+                    nation = nation,
+                    affiliation = affiliation,
+                    constellation = it.constellation,
+                    birthday = birthday,
+                    rarity = rarity,
+                    description = it.description,
+                    image = it.image,
+                    isFavorite = it.isFavorite
+                )
+                characterList.add(characterModel)
+            }
         }
 
         return characterList

@@ -7,7 +7,7 @@ class CharacterDetailViewModel
     (private val genshinImpactUseCase: GenshinImpactUseCase) :
     ViewModel() {
 
-    fun updateFavoriteCharacterByCharacterId(charactedId: String, currentState: Boolean) =
+    suspend fun updateFavoriteCharacterByCharacterId(charactedId: String, currentState: Boolean) =
         genshinImpactUseCase.updateFavoriteCharacterByCharacterId(charactedId, currentState)
 
 }

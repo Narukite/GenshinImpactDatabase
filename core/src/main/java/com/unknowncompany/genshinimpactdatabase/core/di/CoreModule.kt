@@ -8,7 +8,6 @@ import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.RemoteDa
 import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.network.ApiConfig
 import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.network.ApiService
 import com.unknowncompany.genshinimpactdatabase.core.domain.repository.IGenshinImpactRepository
-import com.unknowncompany.genshinimpactdatabase.core.utils.AppCoroutineScopes
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner
@@ -64,10 +63,7 @@ val networkModule = module {
 val repositoryModule = module {
     single { LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
-    factory { AppCoroutineScopes() }
     single<IGenshinImpactRepository> {
-        com.unknowncompany.genshinimpactdatabase.core.data.GenshinImpactRepository(get(),
-            get(),
-            get())
+        com.unknowncompany.genshinimpactdatabase.core.data.GenshinImpactRepository(get(), get())
     }
 }

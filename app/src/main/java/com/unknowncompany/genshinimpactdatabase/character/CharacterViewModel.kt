@@ -1,12 +1,16 @@
 package com.unknowncompany.genshinimpactdatabase.character
 
 import android.app.Application
+import android.content.res.Resources
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.unknowncompany.genshinimpactdatabase.core.data.Resource
+import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.network.ApiResponse
 import com.unknowncompany.genshinimpactdatabase.core.domain.model.Character
 import com.unknowncompany.genshinimpactdatabase.core.domain.usecase.GenshinImpactUseCase
+import com.unknowncompany.genshinimpactdatabase.core.utils.DataMapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.ObsoleteCoroutinesApi
@@ -19,9 +23,12 @@ class CharacterViewModel(
     application: Application,
 ) : AndroidViewModel(application) {
 
-    val characterNames = genshinImpactUseCase.getCharacterNames().asLiveData()
+    var resources: Resources? = null
 
-    fun getAllCharacter(characterNames: List<String>): LiveData<Resource<List<Character>>> =
+    suspend fun getCharacterNames(): LiveData<ApiResponse<List<String>>> =
+        genshinImpactUseCase.getCharacterNames().asLiveData()
+
+    suspend fun getAllCharacter(characterNames: List<String>): LiveData<Resource<List<Character>>> =
         genshinImpactUseCase.getAllCharacter(characterNames).asLiveData()
 
     @ObsoleteCoroutinesApi
@@ -37,8 +44,13 @@ class CharacterViewModel(
             it.trim().isNotEmpty()
         }
         .mapLatest {
-            genshinImpactUseCase.getCharacterByNameQuery(it)
+            resources?.let { mResources ->
+                DataMapper.mapDomainModelsToPresentationModels(
+                    genshinImpactUseCase.getCharacterByNameQuery(it),
+                    mResources)
+            }
         }
+        .flowOn(Dispatchers.Default)
         .asLiveData()
 
 }
