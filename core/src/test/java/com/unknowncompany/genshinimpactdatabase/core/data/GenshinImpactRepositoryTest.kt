@@ -2,7 +2,6 @@ package com.unknowncompany.genshinimpactdatabase.core.data
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
-import com.nhaarman.mockitokotlin2.any
 import com.unknowncompany.genshinimpactdatabase.core.data.source.local.LocalDataSource
 import com.unknowncompany.genshinimpactdatabase.core.data.source.local.entity.CharacterEntity
 import com.unknowncompany.genshinimpactdatabase.core.data.source.remote.RemoteDataSource
